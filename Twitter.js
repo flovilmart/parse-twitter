@@ -121,7 +121,7 @@ OAuth.signRequest = function(request, oauth_parameters, consumer_secret, auth_to
 	// Collect  all the parameters in one signatureParameters object
 	var signatureParams = {};
 	_.extend(signatureParams, request.params, request.body, oauth_parameters);
-	console.log(signatureParams);
+	//console.log(signatureParams);
 	// Create a string based on the parameters
 	var parameterString = OAuth.buildParameterString(signatureParams);
 
@@ -154,10 +154,10 @@ Twitter = function(object){
 	this.authData = null;
 	this.baseURL = "https://api.twitter.com/1.1/"
 	this.OAuth = OAuth;
-	console.log(typeof object);
+	//console.log(typeof object);
 	if (typeof object.get == "function") {
 		//
-		console.log("That's an object");
+		//console.log("That's an object");
 		this.authData = object.get("authData").twitter;
 	}else if(typeof object == "object"){
 		// this is an object
@@ -226,7 +226,7 @@ Twitter.prototype.uploadImage = function(imageURL, message){
 }
 
 Twitter.prototype.send = function(method, endpoint, params, body){
-	console.log("Sending...");
+	//console.log("Sending...");
 	if (endpoint.indexOf("/") == 0) {
 		endpoint = endpoint.slice(1,endpoint.lenght)
 	}
@@ -245,10 +245,10 @@ Twitter.prototype.send = function(method, endpoint, params, body){
 		"oauth_token"			:this.auth_token,
 	}
 	request = OAuth.signRequest(request, oauth_params, this.consumer_secret,  this.auth_token_secret);
-	console.log(oauth_params);
+	//console.log(oauth_params);
 		// Encode the body properly, the current Parse Implementation don't do it properly
 	request.body = OAuth.buildParameterString(request.body);
-	console.log(request);
+	//console.log(request);
 	return Parse.Cloud.httpRequest(request);
 }
 
@@ -283,7 +283,7 @@ Twitter.prototype.sendMultipart = function(method, endpoint, params, body){
 
 
 	var p =  Parse.Cloud.httpRequest(request);
-	console.log(request);
+	//console.log(request);
 	return p;
 }
 
